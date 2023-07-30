@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate
 from .forms import LoginForm
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -18,12 +19,17 @@ def user_login(request):
             if user is not None:
                 if user.is_active():
                     login(request, user)
-                    return (request,'authenticated successfully')
+                    return HttpResponse('authenticated successfully')
                 else:
-                    return (request,'Disabled account')
+                    return HttpResponse('Disabled account')
             if user is None:
-                return (request, "Invalid login")
+                return HttpResponse("Invalid login")
     else:
         form = LoginForm()
         return render(request, 'account/login.html', {'form': form})
     
+def nameView(request):
+    return HttpResponse("Hello, World!")
+
+def dashboard(request):
+    return render(request, 'account/dashboard.html', {'section': 'dashboard'})
