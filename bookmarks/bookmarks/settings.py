@@ -32,14 +32,12 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'account.apps.AccountConfig',
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
-    # 'account',
+    'django.contrib.admin',
 ]
 
 MIDDLEWARE = [
@@ -126,6 +124,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-LOGIN_REDIRECT_URL = '/'
-LOGIN_URL = '/login/'
-LOGOUT_URL='/logout/'
+LOGIN_REDIRECT_URL =''
+LOGIN_URL = 'login'
+LOGOUT_URL='logout'

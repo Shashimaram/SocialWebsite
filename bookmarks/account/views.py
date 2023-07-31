@@ -31,5 +31,6 @@ def user_login(request):
 def nameView(request):
     return HttpResponse("Hello, World!")
 
+@login_required
 def dashboard(request):
     return render(request, 'account/dashboard.html', {'section': 'dashboard'})
