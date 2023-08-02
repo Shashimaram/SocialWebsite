@@ -9,7 +9,7 @@
     <p>Please use the following form to Login</p>
     <form action="." method="post">
         {{ form.as_p }}
-        {% csrf_token %}
         <input type="submit" value="Log in">
+        {% csrf_token %}
     </form>
 {% endblock content %}

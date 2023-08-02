@@ -14,6 +14,18 @@
             <li {% if section == 'dashboard' %} class="selected" {% endif %}><a href="{% url 'dashboard' %}">My dashboard</a></li>
             <li {% if section == 'images' %} class="selected" {% endif %}><a href="#">Images</a></li>
             <li {% if section == 'people' %} class="selected" {% endif %}><a href="#">people</a></li>
+            <a href="{% url 'edit' %}">Edit Your Profile</a>
+            
+            {% if messages %}
+              <ul class="messages">
+                {% for message in messages %}
+                <li class="{{ messages.tags}}">
+                    {{ messages|safe }}
+                    <a href="#" class="close">X</a>
+                </li>
+                {% endfor %}
+              </ul>
+            {% endif %} 
         </ul>
         {% endif %}
 
