@@ -4,6 +4,8 @@ from django.contrib.auth import authenticate
 from .forms import LoginForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from .forms import UserRegisterForm
+from django.contrib.auth.views import PasswordResetView,PasswordResetDoneView,PasswordResetConfirmView,PasswordResetCompleteView
 
 # Create your views here.
 
@@ -34,3 +36,25 @@ def nameView(request):
 @login_required
 def dashboard(request):
     return render(request, 'account/dashboard.html', {'section': 'dashboard'})
+    
+class PasswordResetView(PasswordResetView):
+    template_name = 'registration/password_reset_form.html'
+
+def register(request):
+    user_form = UserRegisterForm()
+    if request.method == 'POST':
+        new_user_form = UserRegisterForm(request.POST)
+        if new_user_form.is_valid():
+            # Create a new user object but avoid saving it yet
+            new_user = new_user_form.save(commit=False)
+            # Set the chosen password
+            new_user.set_password(new_user_form.cleaned_data['password']) # this set_passsword will also encrypt the password
+            # Save the User object
+            new_user.save()
+            return render(request, 'account/register_done.html', {'new_user': new_user}) # this will redirect the user to success page
+        else:
+            return render(request, 'account/register_done.html', {'new_user': user_form})
+            
+    else:
+        return render(request, 'account/register.html', {'user_form': user_form})
+            

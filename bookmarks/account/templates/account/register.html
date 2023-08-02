@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}
+  New user registration
+{% endblock title %}
+
+{% block content %}
+  <p> Please signup by filling the following Form:</p>
+  <form action="." method="post">
+    {{ user_form.as_p }}
+    {% csrf_token %}
+    <input type="submit" name="form-submission" value="Create Account">
+  </form>
+
+
+  {% if user_form.errors %}
+
+  <p>Please correct the following Errors</p>
+  <ul>
+    {% for field in user_form %}
+      {% for error in field.errors  %}
+        {{ field.lable }}: {{ error }} 
+      {% endfor %}
+    {% endfor %}
+  </ul>
+  {% endif %}
+{% endblock content %}

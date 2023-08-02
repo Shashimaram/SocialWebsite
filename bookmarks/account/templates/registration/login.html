@@ -15,11 +15,13 @@
     <p>Please use the following form to login:</p>
     {% endif %}
     <div class="loginForm">
-        <form action="{% url 'login' %}" method="post">
+        <form method="post">
             {{ form.as_p }}
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ next }}"/>
             <input type="submit" value="Login" />
         </form>
+        <p><a href="{% url 'password' %}">Forgotten your password?</a></p>
+        <p><a href="{% url 'register' %}">Click here to create Account</a></p>
     </div>
 {% endblock content %}
