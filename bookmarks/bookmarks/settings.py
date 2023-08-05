@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-blsl6*pmy3ipnm9(=+82zt@^$vssyt+@6a27cg7ru3!piwzg$j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mysite.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'social_django',
+    'images.apps.ImagesConfig',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'bookmarks.urls'
@@ -63,6 +66,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends' #add_this
             ],
         },
     },
@@ -131,3 +135,23 @@ LOGOUT_URL='logout'
 #media
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+AUTHENTICATION_BACKENDS =[
+    'social_core.backends.facebook.FacebookOAuth2',
+]
+
+
+# Social app custom settings
+AUTHENTICATION_BACKENDS=[
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+SOCIAL_AUTH_FACEBOOK_KEY = '669562581352876'
+SOCIAL_AUTH_FACEBOOK_SECRET ='da8b8bd8aee8251ef2910ce393fc36a7'
+
+# for extra info
+
+SOCIAL_AUTH_FACEBOOK_SCOPE=[
+    'email'
+]
